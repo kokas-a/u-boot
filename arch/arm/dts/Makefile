@@ -235,6 +235,7 @@ dtb-$(CONFIG_ARCH_ZYNQMP_R5) += \
 dtb-$(CONFIG_AM33XX) += \
 	am335x-baltos.dtb \
 	am335x-bone.dtb \
+	am335x-bone-min.dtb \
 	am335x-boneblack.dtb \
 	am335x-brppt1-mmc.dtb \
 	am335x-brppt1-nand.dtb \

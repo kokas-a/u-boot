@@ -33,7 +33,8 @@
  * the timings to use or use pre-determined timings (based on using the
  * dynamic method.  Default to the static timing infomation.
  */
-#define CONFIG_SYS_EMIF_PRECALCULATED_TIMING_REGS
+/* Comment out next line for ES Rev B3 or A4 with new "M" Micron memory... */
+/* #define CONFIG_SYS_EMIF_PRECALCULATED_TIMING_REGS */
 #ifndef CONFIG_SYS_EMIF_PRECALCULATED_TIMING_REGS
 #define CONFIG_SYS_AUTOMATIC_SDRAM_DETECTION
 #define CONFIG_SYS_DEFAULT_LPDDR2_TIMINGS
