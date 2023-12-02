@@ -286,7 +286,7 @@ CONFIG_BOOTSTAGE_STASH_SIZE=0x1000
 # CONFIG_SATA_BOOT is not set
 CONFIG_SD_BOOT=y
 # CONFIG_SPI_BOOT is not set
-CONFIG_BOOTDELAY=-1
+CONFIG_BOOTDELAY=3
 # CONFIG_USE_BOOTARGS is not set
 CONFIG_USE_BOOTCOMMAND=y
 CONFIG_BOOTCOMMAND="if test ${boot_fit} -eq 1; then run update_to_fit; fi; run findfdt; run init_console; run envboot; run distro_bootcmd"
