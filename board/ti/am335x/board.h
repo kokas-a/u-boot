@@ -35,11 +35,14 @@ static inline int board_is_bone(void)
 
 static inline int board_is_bone_lt(void)
 {
-	#warning "Ugly hack"
+	return board_ti_is("A335BNLT");
+}
 
+static inline int board_is_bone_min(void)
+{
+	/* BB min has no EEPROM, so board_ti_is() routine is
+	 * not applicable */
 	return 1;
-
-	/* return board_ti_is("A335BNLT"); */
 }
 
 static inline int board_is_pb(void)

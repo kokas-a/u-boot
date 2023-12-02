@@ -276,7 +276,8 @@ const struct dpll_params *get_dpll_ddr_params(void)
 
 	if (board_is_evm_sk())
 		return &dpll_ddr3_303MHz[ind];
-	else if (board_is_pb() || board_is_bone_lt() || board_is_icev2() || board_is_beaglelogic())
+	else if (board_is_pb() || board_is_bone_lt() || board_is_bone_min() \
+			|| board_is_icev2() || board_is_beaglelogic())
 		return &dpll_ddr3_400MHz[ind];
 	else if (board_is_evm_15_or_later())
 		return &dpll_ddr3_303MHz[ind];
@@ -296,6 +297,12 @@ static u8 bone_not_connected_to_ac_power(void)
 			return 1;
 		}
 	}
+
+	if(board_is_bone_min()) {
+		puts("No AC power, switching to default OPP\n");
+		return 1;
+	}
+
 	return 0;
 }
 
@@ -307,13 +314,8 @@ const struct dpll_params *get_dpll_mpu_params(void)
 	if (bone_not_connected_to_ac_power())
 		freq = MPUPLL_M_600;
 
-#warning "One more ugly hack"
-#if 0
 	if (board_is_pb() || board_is_bone_lt() || board_is_beaglelogic())
 		freq = MPUPLL_M_1000;
-#else
-	freq = MPUPLL_M_600;
-#endif
 
 	switch (freq) {
 	case MPUPLL_M_1000:
@@ -575,7 +577,8 @@ void sdram_init(void)
 	if (board_is_evm_sk())
 		config_ddr(303, &ioregs_evmsk, &ddr3_data,
 			   &ddr3_cmd_ctrl_data, &ddr3_emif_reg_data, 0);
-	else if (board_is_pb() || board_is_bone_lt() || board_is_beaglelogic())
+	else if (board_is_pb() || board_is_bone_lt() || board_is_bone_min() \
+			|| board_is_beaglelogic())
 		config_ddr(400, &ioregs_bonelt,
 			   &ddr3_beagleblack_data,
 			   &ddr3_beagleblack_cmd_ctrl_data,
@@ -893,6 +896,11 @@ int board_late_init(void)
 		}
 	}
 
+	if (board_is_bone_min()) {
+		puts("Board: Beagle Min\n");
+		name = "A335BMIN";
+	}
+
 	if (board_is_bbg1())
 		name = "BBG1";
 
@@ -1056,7 +1064,8 @@ int board_eth_init(bd_t *bis)
 
 #ifdef CONFIG_DRIVER_TI_CPSW
 if (!board_is_pb()) {
-	if (board_is_bone() || (board_is_bone_lt() && !board_is_bben()) ||
+	if (board_is_bone() || (board_is_bone_lt() || board_is_bone_min() && \
+			!board_is_bben()) ||
 	    board_is_idk() || board_is_beaglelogic()) {
 		puts("eth0: MII MODE\n");
 		writel(MII_MODE_ENABLE, &cdev->miisel);
@@ -1132,6 +1141,8 @@ int board_fit_config_name_match(const char *name)
 	else if (board_is_bone() && !strcmp(name, "am335x-bone"))
 		return 0;
 	else if (board_is_bone_lt() && !strcmp(name, "am335x-boneblack"))
+		return 0;
+	else if (board_is_bone_min() && !strcmp(name, "am335x-bone-min"))
 		return 0;
 	else if (board_is_pb() && !strcmp(name, "am335x-pocketbeagle"))
 		return 0;

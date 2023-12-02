@@ -11,7 +11,7 @@
 / {
 	model = "TI AM335x BoneMin";
 	compatible = "ti,am335x-bone", "ti,am33xx";
-	
+
 	wifi_pwrseq: wifi_pwrseq {
 		compatible = "mmc-pwrseq-simple";
 		reset-gpios = <&gpio1 12 GPIO_ACTIVE_LOW>; /* GPIO_1[12] */
@@ -51,13 +51,11 @@
 			0x9c (PIN_OUTPUT | MUX_MODE0)		/* gpmc_be0n_cle.gpmc_be0n_cle */
 		>;
 	};
-	
 };
 
 &elm {
 	status = "okay";
 };
-
 
 &gpmc {
 	status = "okay";
@@ -81,7 +79,7 @@
         gpmc,cs-on-ns = <0>;
         gpmc,cs-rd-off-ns = <280>;
         gpmc,cs-wr-off-ns = <280>;
-        gpmc,adv-on-ns = <50>;     
+        gpmc,adv-on-ns = <50>;
         gpmc,adv-rd-off-ns = <280>;
         gpmc,adv-wr-off-ns = <280>;
         gpmc,we-on-ns = <50>;
@@ -100,7 +98,7 @@
         gpmc,wait-monitoring-ns = <0>;
         gpmc,wr-access-ns = <40>;
         gpmc,wr-data-mux-bus-ns = <0>;
-		
+
 /*	
 		gpmc,sync-clk-ps = <0>;
 		gpmc,cs-on-ns = <0>;
@@ -123,7 +121,6 @@
 		gpmc,wr-data-mux-bus-ns = <0>;
 */
 
-	
 		/* MTD partition table */
 		/* All SPL-* partitions are sized to minimal length
 		 * which can be independently programmable. For
@@ -159,7 +156,7 @@
 			label = "bootenv";
 			reg = <0x240000 0x20000>;
 		};
-		
+
 		partition@6 {
 			label = "fdt";
 			reg = <0x260000 0x20000>;
@@ -174,7 +171,7 @@
 			label = "root";
 			reg = <0x800000 0x1400000>;
 		};
-		
+
 		partition@9 {
 			label = "config";
 			reg = <0x1c00000 0x1400000>;

@@ -141,6 +141,8 @@
 	"findfdt="\
 		"if test $board_name = A335BONE; then " \
 			"setenv fdtfile am335x-bone.dtb; fi; " \
+		"if test $board_name = A335BMIN; then " \
+			"setenv fdtfile am335x-bone-min.dtb; fi; " \
 		"if test $board_name = A335BNLT; then " \
 			"setenv fdtfile am335x-boneblack.dtb; fi; " \
 		"if test $board_name = A335PBGL; then " \
